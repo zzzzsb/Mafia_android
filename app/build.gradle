@@ -39,11 +39,11 @@ dependencies {
 
 
     // Retrofit 라이브러리
-    implementation 'com.squareup.retrofit2:retrofit:2.6.4'
+    implementation 'com.squareup.retrofit2:retrofit:2.7.2'
 
     // Gson 변환기 라이브러리
-    implementation 'com.squareup.retrofit2:converter-gson:2.6.4'
+    implementation 'com.squareup.retrofit2:converter-gson:2.7.2'
 
     // Scalars 변환기 라이브러리
-    implementation 'com.squareup.retrofit2:converter-scalars:2.6.4'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.7.2'
 }
