@@ -3,10 +3,10 @@ package com.example.myapplication.retrofit;
 import com.google.gson.annotations.SerializedName;
 
 public class LoginResponse {
-    @SerializedName("result")
+    @SerializedName("resultcode")
     public String resultCode;
 
-    @SerializedName("nicname")
+    @SerializedName("nickname")
     public String nicname;
 
     public String getResultCode() {

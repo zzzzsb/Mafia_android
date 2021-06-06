@@ -3,10 +3,10 @@ package com.example.myapplication.retrofit;
 import com.google.gson.annotations.SerializedName;
 
 public class LoginRequest {
-    @SerializedName("input_id")
+    @SerializedName("userId")
     public String inputId;
 
-    @SerializedName("input_pw")
+    @SerializedName("passWd")
     public String inputPw;
 
     public String getInputId() {
