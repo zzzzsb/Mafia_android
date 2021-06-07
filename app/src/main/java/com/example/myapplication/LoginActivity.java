@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import com.example.myapplication.chat.G;
 import com.example.myapplication.databinding.ActivityLoginBinding;
 import com.example.myapplication.retrofit.LoginRequest;
 import com.example.myapplication.retrofit.LoginResponse;
@@ -92,6 +93,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     //받은 코드 저장
                     String resultCode = result.getResultCode();
+                    G.nickName = result.nicname;
 
                     String success = "200"; //로그인 성공
                     String errorId = "300"; //아이디 일치x
@@ -100,11 +102,10 @@ public class LoginActivity extends AppCompatActivity {
 
                     if (resultCode.equals(success)) {
                         String userID = mBinding.IDEditText.getText().toString();
-                        String userPassword = mBinding.passwordEditText.getText().toString();
 
 
-                        Toast.makeText(LoginActivity.this, userID + "님 환영합니다.", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        Toast.makeText(LoginActivity.this, G.nickName + "님 환영합니다.", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(LoginActivity.this, MainChatActivity.class);
                         intent.putExtra("userId", userID);
                         startActivity(intent);
                         LoginActivity.this.finish();
