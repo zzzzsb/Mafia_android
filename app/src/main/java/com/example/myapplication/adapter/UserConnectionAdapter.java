@@ -52,7 +52,12 @@ public class UserConnectionAdapter extends RecyclerView.Adapter<UserConnectionAd
     public void onBindViewHolder(final UserConnectionAdapter.ViewHolder holder, final int position){
         try{
             holder.nicknameView.setText(userList.get(position).getNickName());
-            //holder.statusView.setText(dangerList.get(position).getBSSHNM());
+
+            if(userList.get(position).isState() == true) {
+                holder.statusView.setImageResource(R.drawable.ic_connection_on);
+            } else {
+                holder.statusView.setImageResource(R.drawable.ic_connection_off);
+            }
 
         } catch (Exception e) {System.out.println(e);}
     }
