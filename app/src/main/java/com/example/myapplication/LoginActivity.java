@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,6 +20,10 @@ import com.example.myapplication.databinding.ActivityLoginBinding;
 import com.example.myapplication.retrofit.LoginRequest;
 import com.example.myapplication.retrofit.LoginResponse;
 import com.example.myapplication.retrofit.RetrofitClient;
+import com.example.myapplication.retrofit.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -103,10 +108,11 @@ public class LoginActivity extends AppCompatActivity {
                     if (resultCode.equals(success)) {
                         String userID = mBinding.IDEditText.getText().toString();
 
-
                         Toast.makeText(LoginActivity.this, G.nickName + "님 환영합니다.", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(LoginActivity.this, MainChatActivity.class);
+
                         intent.putExtra("userId", userID);
+
                         startActivity(intent);
                         LoginActivity.this.finish();
 
