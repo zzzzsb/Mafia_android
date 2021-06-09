@@ -15,7 +15,8 @@
         <activity android:name=".DocterChatActivity"></activity>
         <activity android:name=".PoliceChatActivity" />
         <activity android:name=".MafiaChatActivity" />
-        <activity android:name=".MainChatActivity" />
+        <activity android:name=".MainChatActivity"
+            android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

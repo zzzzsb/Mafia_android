@@ -10,7 +10,9 @@ public class MessageItem {
     }
 
     public MessageItem() {
+
     }
+
 
     //Getter & Setter
     public String getNickname() {
