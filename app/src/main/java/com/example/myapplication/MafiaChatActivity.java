@@ -9,6 +9,6 @@ public class MafiaChatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mafia_chat);
+        setContentView(R.layout.activity_main_chat);
     }
 }
