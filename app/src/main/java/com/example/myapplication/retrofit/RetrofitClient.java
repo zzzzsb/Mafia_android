@@ -10,8 +10,8 @@ public class RetrofitClient {
     private static RetrofitClient instance = null;
     private static initMyApi initMyApi;
     //사용하고 있는 서버 BASE 주소
-    //private static String baseUrl = "http://ec2-13-125-225-233.ap-northeast-2.compute.amazonaws.com:8080/";
-    private static String baseUrl = "http://10.0.2.2:8080/";
+    private static String baseUrl = "http://ec2-13-125-225-233.ap-northeast-2.compute.amazonaws.com:8080/";
+    //private static String baseUrl = "http://10.0.2.2:8080/";
 
     private RetrofitClient() {
         //로그를 보기 위한 Interceptor

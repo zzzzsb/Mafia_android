@@ -22,8 +22,7 @@ import ua.naiksoftware.stomp.dto.StompHeader;
 public class StompAPI {
 
     private StompClient mStompClient;
-    String BASE_URL = "ws://10.0.2.2:8080/ws/websocket";
-
+    String BASE_URL = "ws://ec2-13-125-225-233.ap-northeast-2.compute.amazonaws.com:8080/ws/websocket";
     String TAG = "TAG";
     boolean isUnexpectedClosed;
 
