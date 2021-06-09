@@ -12,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-        <activity android:name=".MainChatActivity"></activity>
+        <activity android:name=".DocterChatActivity"></activity>
+        <activity android:name=".PoliceChatActivity" />
+        <activity android:name=".MafiaChatActivity" />
+        <activity android:name=".MainChatActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
