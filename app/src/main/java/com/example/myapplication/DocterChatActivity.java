@@ -10,7 +10,7 @@ public class DocterChatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_chat);
+        setContentView(R.layout.fragment_main_chat);
     }
 
     public void clickSend(View view){
