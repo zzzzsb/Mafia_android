@@ -45,14 +45,6 @@ public class MainActivity extends AppCompatActivity {
 
         mainChatFragment = new MainChatFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.chatPlace, mainChatFragment).commit();
-        connectButton = findViewById(R.id.connectButton);
-        connectButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, UserConnectionActivity.class);
-                startActivity(intent);
-            }
-        });
 
         roleTextView = findViewById(R.id.yourRole_2);
         userId = getIntent().getStringExtra("userId");
