@@ -35,7 +35,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="게임으로 돌아가기"
+                android:text="대기방으로 돌아가기"
                 android:id="@+id/returntoGameBtn"
                 app:layout_constraintTop_toBottomOf="@id/UCtitle"
                 android:gravity="center"
