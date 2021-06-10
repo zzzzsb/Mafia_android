@@ -40,11 +40,11 @@ public class UserConnectionActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.userRecycle);
         button = findViewById(R.id.returntoGameBtn);
 
-        //게임으로 돌아가기 버튼
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                Intent intent = new Intent(UserConnectionActivity.this, WatingRoomActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -91,14 +91,5 @@ public class UserConnectionActivity extends AppCompatActivity {
     private void setAdapter(RecyclerView recyclerView) {
         adapter = new UserConnectionAdapter(userList);
         recyclerView.setAdapter(adapter);
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent = new Intent(UserConnectionActivity.this, MainActivity.class); //지금 액티비티에서 다른 액티비티로 이동하는 인텐트 설정
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);    //인텐트 플래그 설정
-        startActivity(intent);  //인텐트 이동
-        finish();   //현재 액티비티 종료
     }
 }
