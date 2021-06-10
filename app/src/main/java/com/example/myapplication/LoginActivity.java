@@ -109,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                         String userID = mBinding.IDEditText.getText().toString();
 
                         Toast.makeText(LoginActivity.this, G.nickName + "님 환영합니다.", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, WatingRoomActivity.class);
 
                         intent.putExtra("userId", userID);
                         intent.putExtra("nickname", G.nickName);
