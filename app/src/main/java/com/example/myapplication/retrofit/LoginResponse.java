@@ -17,12 +17,4 @@ public class LoginResponse {
         this.resultCode = resultCode;
     }
 
-    public String getToken() {
-        return nicname;
-    }
-
-    public void setToken(String token) {
-        this.nicname = nicname;
-    }
-
 }
