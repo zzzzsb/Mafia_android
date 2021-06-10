@@ -16,6 +16,18 @@
         android:paddingBottom="15dp"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="친구의 접속상태"
+        android:textSize="15dp"
+        android:layout_margin="20dp"
+        app:layout_constraintTop_toBottomOf="@id/yourRole"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cornerRadius="20dp"
+        />
+
     <TextView
         android:id="@+id/yourRole"
         android:layout_width="match_parent"
