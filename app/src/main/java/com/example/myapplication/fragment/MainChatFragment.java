@@ -32,15 +32,20 @@ public class MainChatFragment extends Fragment {
     EditText et;
     TextView roleTextView;
 
-    List<MessageItem> messageItems = new ArrayList<>();
+    List<MessageItem> messageItems;
     ChatAdapter adapter;
     RecyclerView recyclerView;
     Button sendBtn;
 
     private String userId;
+    StompAPI stompAPI;
 
     String nickname;
-    StompAPI stompAPI = new StompAPI();
+
+    public MainChatFragment(List<MessageItem> messageItemList, StompAPI stompAPI) {
+        this.messageItems = messageItemList;
+        this.stompAPI = stompAPI;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,7 +58,6 @@ public class MainChatFragment extends Fragment {
         recyclerView = view.findViewById(R.id.chatRecycle);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         userId = getActivity().getIntent().getStringExtra("userId");
-
         this.nickname = getActivity().getIntent().getStringExtra("nickname");
         setAdapter(recyclerView);
 
@@ -79,9 +83,6 @@ public class MainChatFragment extends Fragment {
                 clickSend(view);
             }
         });
-
-        stompAPI.initStomp();
-        stompAPI.onConnected(userId);
 
         return view;
     }

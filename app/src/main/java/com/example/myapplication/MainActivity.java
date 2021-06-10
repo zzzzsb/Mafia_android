@@ -31,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
     Button button;
 
-    MainChatFragment mainChatFragment;
+    MainChatFragment dayChatFragment;
+    MainChatFragment nightChatFragment;
 
     Button connectButton;
     TextView roleTextView;
@@ -47,8 +48,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mainChatFragment = new MainChatFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.chatPlace, mainChatFragment).commit();
+        dayChatFragment = new MainChatFragment(new ArrayList<>(), stompAPI);
+        nightChatFragment = new MainChatFragment(new ArrayList<>(), stompAPI);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.chatPlace, dayChatFragment).commit();
+
         connectButton = findViewById(R.id.connectButton);
         connectButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +70,12 @@ public class MainActivity extends AppCompatActivity {
         stompAPI.setJobListener( new StompAPI.JobListener() {
             @Override
             public void onJobReceived(String role) {
-                roleTextView.setText(role);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        roleTextView.setText(role);
+                    }
+                });
             }
         });
 
