@@ -112,6 +112,7 @@ public class LoginActivity extends AppCompatActivity {
                         Intent intent = new Intent(LoginActivity.this, MainChatActivity.class);
 
                         intent.putExtra("userId", userID);
+                        intent.putExtra("nickname", G.nickName);
 
                         startActivity(intent);
                         LoginActivity.this.finish();
