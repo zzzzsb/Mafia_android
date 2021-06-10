@@ -7,59 +7,68 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.myapplication.R;
+import com.example.myapplication.adapter.UserConnectionAdapter;
+import com.example.myapplication.retrofit.User;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class ChatAdapter extends BaseAdapter {
+public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    ArrayList<MessageItem> messageItems;
-    LayoutInflater layoutInflater;
+    List<MessageItem> messageList = null;
+    String nickname;
 
-    public ChatAdapter(ArrayList<MessageItem> messageItems, LayoutInflater layoutInflater) {
-        this.messageItems = messageItems;
-        this.layoutInflater = layoutInflater;
-    }
+    public class ViewHolder extends RecyclerView.ViewHolder{
 
-    @Override
-    public int getCount() {
-        return messageItems.size();
-    }
+        TextView tvName;
+        TextView tvMsg;
 
-    @Override
-    public Object getItem(int position) {
-        return messageItems.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View view, ViewGroup viewGroup) {
-
-        //현재 보여줄 번째의(position)의 데이터로 뷰를 생성
-        MessageItem item=messageItems.get(position);
-
-        //재활용할 뷰는 사용하지 않음!!
-        View itemView=null;
-
-        //메세지가 내 메세지인지??
-        if(item.getNickname().equals(G.nickName)){
-            itemView= layoutInflater.inflate(R.layout.my_msgbox,viewGroup,false);
-        }else{
-            itemView= layoutInflater.inflate(R.layout.other_msgbox,viewGroup,false);
+        ViewHolder(View itemView){
+            super(itemView);
+            tvName = itemView.findViewById(R.id.tv_name);
+            tvMsg = itemView.findViewById(R.id.tv_msg);
         }
-
-        //만들어진 itemView에 값들 설정
-        ImageView iv= itemView.findViewById(R.id.iv);
-        TextView tvName= itemView.findViewById(R.id.tv_name);
-        TextView tvMsg= itemView.findViewById(R.id.tv_msg);
-
-        tvName.setText(item.getNickname());
-        tvMsg.setText(item.getMessage());
-
-        return itemView;
     }
+
+    public ChatAdapter(List<MessageItem> messageItems, String nickname) {
+        this.messageList = messageItems;
+        this.nickname = nickname;
+    }
+    @Override
+    public int getItemViewType(int position) {
+        System.out.println("NICKNAME" + nickname);
+        if(messageList.get(position).getSender().equals(nickname)) return 0;
+        else return 1;
+    }
+
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView;
+        //메세지가 내 메세지인지??
+        if(viewType == 0){
+            itemView= LayoutInflater.from(parent.getContext()).inflate(R.layout.my_msgbox,parent,false);
+        }else {
+            itemView= LayoutInflater.from(parent.getContext()).inflate(R.layout.other_msgbox,parent,false);
+        }
+        return new ViewHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position){
+        MessageItem item = messageList.get(position);
+        if(viewHolder instanceof ViewHolder) {
+            ((ViewHolder) viewHolder).tvName.setText(item.getSender());
+            ((ViewHolder) viewHolder).tvMsg.setText(item.getContent());
+        }
+    }
+
+    @Override
+    public int getItemCount() {
+        return messageList.size();
+    }
+
+
 }

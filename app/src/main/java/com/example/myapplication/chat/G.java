@@ -1,5 +1,5 @@
 package com.example.myapplication.chat;
 
 public class G {
-    public static String nickName;
+    public static String nickName= "nacho";
 }

@@ -1,32 +1,34 @@
 package com.example.myapplication.chat;
 
 public class MessageItem {
-    String nickname;
-    String message;
+    String sender;
+    String content;
 
-    public MessageItem(String nickname, String message) {
-        this.nickname = nickname;
-        this.message = message;
+    public MessageItem(String sender, String content) {
+        this.sender = sender;
+        this.content = content;
     }
 
     public MessageItem() {
+
     }
+
 
     //Getter & Setter
-    public String getNickname() {
-        return nickname;
+    public String getSender() {
+        return sender;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 
-    public String getMessage() {
-        return message;
+    public String getContent() {
+        return content;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setContent(String content) {
+        this.content = content;
     }
 
 }

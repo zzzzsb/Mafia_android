@@ -69,9 +69,9 @@ public class UserConnectionActivity extends AppCompatActivity {
 
 
         StompAPI stompAPI = new StompAPI();
-        stompAPI.setListener(new StompAPI.Listener() {
+        stompAPI.setStartListener1(new StompAPI.StartListener() {
             @Override
-            public void onConnected() {
+            public void onConnected(String nickName) {
                 initMyApi.getAllUserList().enqueue(new Callback<List<User>>() {
                     @Override
                     public void onResponse(Call<List<User>> call, Response<List<User>> response) {
@@ -84,8 +84,6 @@ public class UserConnectionActivity extends AppCompatActivity {
 
                     }
                 });
-
-
             }
         });
     }
