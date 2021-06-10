@@ -1,31 +1,22 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Message;
 import android.view.View;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
-import com.example.myapplication.databinding.ActivityLoginBinding;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.myapplication.adapter.UserConnectionAdapter;
 import com.example.myapplication.chat.ChatAdapter;
-import com.example.myapplication.chat.G;
 import com.example.myapplication.chat.MessageItem;
-import com.example.myapplication.retrofit.User;
 import com.example.myapplication.stomp.StompAPI;
 
 import java.util.ArrayList;
@@ -50,6 +41,15 @@ public class MainChatActivity extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main_chat);
+
+            connectButton = findViewById(R.id.connectButton);
+            connectButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MainChatActivity.this, UserConnectionActivity.class);
+                    startActivity(intent);
+                }
+            });
 
             roleTextView = findViewById(R.id.yourRole_2);
 
@@ -107,20 +107,6 @@ public class MainChatActivity extends AppCompatActivity {
 
             stompAPI.initStomp();
             stompAPI.onConnected(userId);
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_chat);
-
-        connectButton = findViewById(R.id.connectButton);
-        connectButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainChatActivity.this, UserConnectionActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
 
     }
 
