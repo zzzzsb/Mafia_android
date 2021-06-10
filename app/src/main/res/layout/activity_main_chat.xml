@@ -106,6 +106,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:backgroundTint="#ff8800"
+            android:onClick="clickSend"
             android:text="send" />
     </LinearLayout>
 
