@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -28,7 +29,7 @@
             android:layout_marginLeft="15dp" />
 
         <ImageView
-            android:id="@+id/titleTextView"
+            android:id="@+id/statusView"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_margin="10dp"
