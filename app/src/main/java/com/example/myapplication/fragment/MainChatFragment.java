@@ -63,10 +63,13 @@ public class MainChatFragment extends Fragment {
                 //System.out.println(messageItems.size());
                 messageItems.add(messageItem);
 
-                System.out.println("LISTSIZE: " + messageItems.size());
-                adapter.notifyDataSetChanged();
-                recyclerView.scrollToPosition(messageItems.size()-1);
-
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.notifyDataSetChanged();
+                        recyclerView.scrollToPosition(messageItems.size()-1);
+                    }
+                });
             }
         });
 
