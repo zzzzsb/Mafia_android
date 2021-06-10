@@ -7,14 +7,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.myapplication.stomp.StompAPI;
+
 public class WatingRoomActivity extends AppCompatActivity {
 
+    private String userId;
     Button connectButton, startButton;
+    StompAPI stompAPI = new StompAPI();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wating_room);
+
+        userId = getIntent().getStringExtra("userId");
 
         connectButton = findViewById(R.id.userConnection);
         connectButton.setOnClickListener(new View.OnClickListener() {
@@ -33,5 +39,8 @@ public class WatingRoomActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        stompAPI.initStomp();
+        stompAPI.onConnected(userId);
     }
 }
