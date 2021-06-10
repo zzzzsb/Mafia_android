@@ -54,19 +54,21 @@ public class MainChatActivity extends AppCompatActivity {
 
             userId = getIntent().getStringExtra("userId");
 
-            stompAPI.setStartListener2(new StompAPI.StartListener() {
-                @Override
-                public void onConnected(String nickName) {
-                    MainChatActivity.this.nickname = nickName;
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            setAdapter(recyclerView);
-                        }
-                    });
+            this.nickname = getIntent().getStringExtra("nickname");
+            setAdapter(recyclerView);
 
-                }
-            });
+//            stompAPI.setStartListener2(new StompAPI.StartListener() {
+//                @Override
+//                public void onConnected(String nickName) {
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//
+//                        }
+//                    });
+//
+//                }
+//            });
 
             stompAPI.setJobListener( new StompAPI.JobListener() {
                 @Override
