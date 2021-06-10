@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.myapplication.fragment.MainChatFragment;
 import com.example.myapplication.retrofit.RetrofitClient;
 import com.example.myapplication.retrofit.User;
 import com.example.myapplication.stomp.StompAPI;
@@ -30,12 +31,17 @@ public class MainActivity extends AppCompatActivity {
 
     Button button;
 
+    MainChatFragment mainChatFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        userId = getIntent().getStringExtra("userId");
+        mainChatFragment = new MainChatFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.chatPlace, mainChatFragment).commit();
+
+        /* userId = getIntent().getStringExtra("userId");
 
         StompAPI stompAPI = new StompAPI();
         stompAPI.initStomp();
@@ -48,6 +54,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, UserConnectionActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
     }
 }
