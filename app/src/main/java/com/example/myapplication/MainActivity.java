@@ -27,7 +27,12 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    MainChatFragment mainChatFragment;
+    private List<User> userList;
+
+    Button button;
+
+    MainChatFragment dayChatFragment;
+    MainChatFragment nightChatFragment;
 
     Button connectButton;
     TextView roleTextView;
