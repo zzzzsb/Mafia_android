@@ -5,6 +5,7 @@ import android.util.Log;
 
 import androidx.dynamicanimation.animation.SpringAnimation;
 
+import com.example.myapplication.chat.MessageItem;
 import com.example.myapplication.retrofit.User;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -22,14 +23,20 @@ import ua.naiksoftware.stomp.dto.StompHeader;
 public class StompAPI {
 
     private StompClient mStompClient;
+
     String BASE_URL = "ws://ec2-52-78-141-185.ap-northeast-2.compute.amazonaws.com:8080/ws/websocket";
+    //String BASE_URL = "ws://10.0.2.2:8080/ws/websocket";
     String TAG = "TAG";
     boolean isUnexpectedClosed;
 
     private List<StompHeader> headerList = new ArrayList<>();
     private List<User> userList;
+    Gson gson = new Gson();
 
-    private Listener listener;
+    private StartListener startListener1;
+    private StartListener startListener2;
+    private JobListener jobListener;
+    private ChatListener allChatListener;
 
     @SuppressLint("CheckResult")
     public void initStomp() {
@@ -39,44 +46,85 @@ public class StompAPI {
     }
 
     @SuppressLint("CheckResult")
-    public void onConnected(String nickname) {
+    public void onConnected(String userId) {
 
-        mStompClient.topic("/topic/public").subscribe(topicMessage -> {
-            Gson gson = new Gson();
-            //List<User> list = gson.fromJson(topicMessage.getPayload(), new TypeToken<List<User>>(){}.getType());
+        mStompClient.topic("/topic/public/start").subscribe(topicMessage -> {
 
-            if(listener!=null) {
-                listener.onConnected();
+            if(startListener1!=null) {
+                startListener1.onConnected(topicMessage.getPayload());
+            }
+
+            if(startListener2!=null) {
+                startListener2.onConnected(topicMessage.getPayload());
             }
         });
 
+         mStompClient.topic("/user/queue/role").subscribe(message -> {
+           Log.d("ROLE", message.getPayload());
+           if(jobListener!=null) {
+               Log.d("ROLE", message.getPayload());
+               jobListener.onJobReceived(message.getPayload());
+           }
+        });
+
+        mStompClient.topic("/topic/public/day").subscribe(topicMessage -> {
+
+            MessageItem messageItem = gson.fromJson(topicMessage.getPayload(), new TypeToken<MessageItem>(){}.getType());
+
+            if(allChatListener!=null) {
+                allChatListener.onMessageReceived(messageItem);
+            }
+
+        });
+
         JsonObject obj = new JsonObject();
-        obj.addProperty("sender", nickname);
-        obj.addProperty("type", "JOIN");
+        obj.addProperty("sender", userId);
 
         mStompClient.send("/app/chat.addUser", obj.toString()).subscribe();
+        mStompClient.send("/app/role", userId).subscribe();
     }
 
-    public void sendMessage(User user, String msg) {
+
+    @SuppressLint("CheckResult")
+    public void sendMessage(String user, String msg) {
 
         JsonObject obj = new JsonObject();
-        obj.addProperty("sender", "a");
+        obj.addProperty("sender", user);
         obj.addProperty("content", msg);
-        obj.addProperty("type", "CHAT");
         mStompClient.send("/app/chat.sendMessage", obj.toString()).subscribe();
-
     }
 
     public void onDisconnect() {
         mStompClient.disconnect();
     }
 
-    public void setListener(Listener listener) {
-        this.listener = listener;
+    public void setStartListener1(StartListener listener) {
+        this.startListener1 = listener;
     }
 
-    public interface Listener {
-        void onConnected();
+    public void setStartListener2(StartListener listener) {
+        this.startListener2 = listener;
     }
+
+    public void setJobListener(JobListener listener) {
+        this.jobListener = listener;
+    }
+
+    public void setAllChatListener(ChatListener listener) {
+        this.allChatListener = listener;
+    }
+
+    public interface StartListener {
+        void onConnected(String nickName);
+    }
+
+    public interface ChatListener {
+        void onMessageReceived(MessageItem messageItem);
+    }
+
+    public interface JobListener {
+        void onJobReceived(String role);
+    }
+
 
 }

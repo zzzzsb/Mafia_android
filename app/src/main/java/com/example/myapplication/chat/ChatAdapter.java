@@ -19,6 +19,7 @@ import java.util.List;
 public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     List<MessageItem> messageList = null;
+    String nickname;
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -32,12 +33,14 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    public ChatAdapter(List<MessageItem> messageItems) {
+    public ChatAdapter(List<MessageItem> messageItems, String nickname) {
         this.messageList = messageItems;
+        this.nickname = nickname;
     }
     @Override
     public int getItemViewType(int position) {
-        if(messageList.get(position).getNickname().equals("수빈")) return 0;
+        System.out.println("NICKNAME" + nickname);
+        if(messageList.get(position).getSender().equals(nickname)) return 0;
         else return 1;
     }
 
@@ -57,8 +60,8 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position){
         MessageItem item = messageList.get(position);
         if(viewHolder instanceof ViewHolder) {
-            ((ViewHolder) viewHolder).tvName.setText(item.getNickname());
-            ((ViewHolder) viewHolder).tvMsg.setText(item.getMessage());
+            ((ViewHolder) viewHolder).tvName.setText(item.getSender());
+            ((ViewHolder) viewHolder).tvMsg.setText(item.getContent());
         }
     }
 
