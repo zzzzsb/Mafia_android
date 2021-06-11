@@ -82,6 +82,11 @@ public class MainChatActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             roleTextView.setText(role);
+                            if (role.contains("사회자")){
+                                connectButton.setVisibility(View.VISIBLE);
+                            }else {
+                                connectButton.setVisibility(View.GONE);
+                            }
                         }
                     });
                     //roleTextView.setText(role);
