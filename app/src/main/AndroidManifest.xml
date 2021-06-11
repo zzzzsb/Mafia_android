@@ -12,9 +12,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-        <activity android:name=".DocterChatActivity"></activity>
-        <activity android:name=".PoliceChatActivity" />
-        <activity android:name=".MafiaChatActivity" />
         <activity android:name=".MainChatActivity"
             android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".LoginActivity">
