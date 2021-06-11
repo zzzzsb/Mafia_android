@@ -46,8 +46,17 @@ public class MainChatActivity extends AppCompatActivity {
             connectButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(MainChatActivity.this, UserConnectionActivity.class);
-                    startActivity(intent);
+                    stompAPI.setMafiaListener(new StompAPI.MafiaListener() {
+                        @Override
+                        public void onMafiaReceived(String mafia) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    connectButton.setText(mafia);
+                                }
+                            });
+                        }
+                    });
                 }
             });
 

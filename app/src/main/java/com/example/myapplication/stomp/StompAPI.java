@@ -36,6 +36,7 @@ public class StompAPI {
     private StartListener startListener1;
     private StartListener startListener2;
     private JobListener jobListener;
+    private MafiaListener mafiaListener;
     private ChatListener allChatListener;
 
     @SuppressLint("CheckResult")
@@ -110,6 +111,10 @@ public class StompAPI {
         this.jobListener = listener;
     }
 
+    public void setMafiaListener(MafiaListener listener) {
+        this.mafiaListener = listener;
+    }
+
     public void setAllChatListener(ChatListener listener) {
         this.allChatListener = listener;
     }
@@ -124,6 +129,10 @@ public class StompAPI {
 
     public interface JobListener {
         void onJobReceived(String role);
+    }
+
+    public interface MafiaListener {
+        void onMafiaReceived(String Mafia);
     }
 
 
