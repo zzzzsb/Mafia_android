@@ -24,11 +24,9 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private List<User> userList;
-
     private String userId;
-
-    Button button;
+    Button connectButton, startButton;
+    StompAPI stompAPI = new StompAPI();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,17 +35,25 @@ public class MainActivity extends AppCompatActivity {
 
         userId = getIntent().getStringExtra("userId");
 
-        StompAPI stompAPI = new StompAPI();
-        stompAPI.initStomp();
-        stompAPI.onConnected(userId);
-
-        button = findViewById(R.id.main_button);
-        button.setOnClickListener(new View.OnClickListener() {
+        connectButton = findViewById(R.id.userConnection);
+        connectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, UserConnectionActivity.class);
                 startActivity(intent);
             }
         });
+
+        startButton = findViewById(R.id.startGame);
+        startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MainChatActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        stompAPI.initStomp();
+        stompAPI.onConnected(userId);
     }
 }
